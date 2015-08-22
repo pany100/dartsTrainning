@@ -26,21 +26,14 @@ angular.module('dartTrainningApp', ['ionic'])
   $stateProvider
 
     .state('app', {
-    url: '/app',
-    abstract: true,
-    templateUrl: 'templates/menu.html',
-    controller: 'MainCtrl'
-  })
-
-    .state('app.playlists', {
-      url: '/playlists',
+      url: '/main',
       views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
+        'main': {
+          templateUrl: 'templates/main.html',
           controller: 'MainCtrl'
         }
       }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/main');
 });
