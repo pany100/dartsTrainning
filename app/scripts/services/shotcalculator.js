@@ -12,9 +12,11 @@ angular.module('dartTrainningApp')
     return {
       simulateShoot: function( aim ) {
         var optimalTarget = dartboardDistances.getOptimalDistanceForTarget( aim.points, aim.target ),
-            distanceCalc  = this.distribution( optimalTarget.distance, 10000 ),
-            radiansCalc   = this.distribution( optimalTarget.radians, 10000 ),
-            shotResult    = dartboardDistances.getResult( distanceCalc, radiansCalc );
+            distanceCalc  = this.distribution( optimalTarget.distance, 10000 );
+        if ( optimalTarget.radians != null ) {
+          var radiansCalc   = this.distribution( optimalTarget.radians, 10000 );
+        }
+        var shotResult    = dartboardDistances.getResult( distanceCalc, radiansCalc );
         console.log( shotResult );
       },
       distribution : function ( media, desvio ) {

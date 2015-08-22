@@ -11,7 +11,7 @@ angular.module('dartTrainningApp')
   .controller('MainCtrl', function (shotCalculator, $scope) {
 
     shotCalculator.simulateShoot( {
-      'points' : 'triple',
+      'points' : 'bull',
       'target' : 1
     } );
 
