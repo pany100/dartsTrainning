@@ -8,18 +8,16 @@
  * Service in the dartTrainningApp.
  */
 angular.module('dartTrainningApp')
-  .service('shotCalculator', function (dartboardDistances) {
+  .service('shotCalculator', function (dartboardDistances, difficultyManager) {
     return {
       simulateShoot: function( aim ) {
-        var optimalTarget = dartboardDistances.getOptimalDistanceForTarget( aim.points, aim.target ),
-            distanceCalc  = this.distribution( optimalTarget.distance, 10000 );
-        if ( optimalTarget.radians != null ) {
-          var radiansCalc   = this.distribution( optimalTarget.radians, 10000 );
-        }
+        var optimalTarget = dartboardDistances.getOptimalDistanceForTarget( aim.target, aim.points ),
+            distanceCalc  = this.distribution( optimalTarget.distance, difficultyManager.getDistanceDeviation() , true),
+            radiansCalc   = this.distribution( optimalTarget.radians, difficultyManager.getRadiansDeviation() );
         var shotResult    = dartboardDistances.getResult( distanceCalc, radiansCalc );
-        console.log( shotResult );
+        return shotResult;
       },
-      distribution : function ( media, desvio ) {
+      distribution : function ( media, desvio , withModule) {
         var rand      = Math.random(),
             logRes    = Math.log( rand + 0.00001 ),
             varianza  = Math.pow( desvio, 2 ),
@@ -27,6 +25,9 @@ angular.module('dartTrainningApp')
             cosTerm   = 2 * Math.PI * rand,
             secTerm   = Math.cos( cosTerm ),
             randFin   = firstTerm * secTerm + media;
+        if ( withModule ) {
+          return Math.abs( randFin );
+        }
         return randFin;
       }
     };

@@ -20,22 +20,55 @@ describe('Service: dartboardDistances', function () {
     expect(result.points).toBe('bull');
   })
 
+  it('result for outer', function () {
+    var result = dartboardDistances.getResult(8500, 80000);
+    expect(result.points).toBe('outer');
+  })
+
   it('result for t20', function () {
     var result = dartboardDistances.getResult(100000, 80000);
     expect(result.points).toBe('triple');
     expect(result.target).toBe('20');
   })
 
+  it('result for d20', function () {
+    var result = dartboardDistances.getResult(165000, 80000);
+    expect(result.points).toBe('double');
+    expect(result.target).toBe('20');
+  })
+
+  it('result for single 20', function () {
+    var result = dartboardDistances.getResult(155000, 80000);
+    expect(result.points).toBe('bigSingle');
+    expect(result.target).toBe('20');
+  })
+
+  it('single match with negative radians', function () {
+    var result = dartboardDistances.getResult(21736, -32585);
+    expect(result.points).toBe('smallSingle');
+    expect(result.target).toBe('8');
+  })
+
+  it('result for single 20', function () {
+    var result = dartboardDistances.getResult(20000, 80000);
+    expect(result.points).toBe('smallSingle');
+    expect(result.target).toBe('20');
+  })
+
+  it('result for single 5', function () {
+    var result = dartboardDistances.getResult(155000, 60000);
+    expect(result.points).toBe('bigSingle');
+    expect(result.target).toBe('5');
+  })
+
   it('testDistance for bull', function () {
     var result = dartboardDistances.getOptimalDistanceForTarget('bull', undefined);
     expect(result.distance).toBe(0);
-    expect(result.radians).toBe(undefined);
   })
 
   it('testDistance for outer', function () {
     var result = dartboardDistances.getOptimalDistanceForTarget('outer', undefined);
     expect(result.distance).toBe(0);
-    expect(result.radians).toBe(undefined);
   })
 
   it('testDistance for smallSingle 1', function () {

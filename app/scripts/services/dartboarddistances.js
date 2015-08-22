@@ -24,6 +24,8 @@ angular.module('dartTrainningApp')
         }
         if ( points != 'bull' && points != 'outer' ) {
           returnObject.radians = calcMedia( radians[target][0] );
+        } else {
+          returnObject.radians = 0;
         }
         return returnObject;
       },
