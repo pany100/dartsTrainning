@@ -9,7 +9,7 @@
  */
 angular.module('dartTrainningApp')
   .service('difficultyManager', function () {
-    var difficultyIndex = 90;
+    var difficultyIndex = 10;
     return {
       setDifficulty: function( value ) {
         difficultyIndex = value;
@@ -17,11 +17,11 @@ angular.module('dartTrainningApp')
       getDifficulty: function( ) {
         return difficultyIndex;
       },
-      getDistanceDeviation: function(  ) {
-        return ( 100 - difficultyIndex ) * 1200;
+      getDistanceDeviation: function() {
+        return ( 31 - difficultyIndex ) * 1200;
       },
-      getRadiansDeviation: function(  ) {
-        return ( 100 - difficultyIndex ) * 1500;
+      getRadiansDeviation: function() {
+        return ( 31 - difficultyIndex ) * 1200;
       }
     }
   });
