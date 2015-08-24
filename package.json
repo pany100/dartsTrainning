@@ -2,7 +2,9 @@
   "name": "DartTrainning",
   "version": "0.0.0",
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "gulp": "^3.9.0"
+  },
   "devDependencies": {
     "cordova": "~4.2.0",
     "elementtree": "0.1.6",
@@ -26,6 +28,7 @@
     "grunt-ng-constant": "^1.0.0",
     "grunt-usemin": "~3.0.0",
     "grunt-wiredep": "^2.0.0",
+    "gulp-sass": "^2.0.4",
     "ionic": "^1.3.7",
     "jasmine-core": "^2.3.4",
     "jshint-stylish": "~1.0.0",

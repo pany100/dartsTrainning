@@ -1,0 +1,34 @@
+<ion-view view-title="Game">
+  <ion-content  class="main-content">
+    <h2 class="horizontally-centered home-space-top">Scores</h2>
+    <div class="row cell-row home-space-top">
+      <div class="col">{{ players.p1 }}</div>
+      <div class="col"></div>
+      <div class="col">{{ players.p2 }}</div>
+    </div>
+
+    <board-row type="20"></board-row>
+    <board-row type="19"></board-row>
+    <board-row type="18"></board-row>
+    <board-row type="17"></board-row>
+    <board-row type="16"></board-row>
+    <board-row type="15"></board-row>
+    <board-row type="center"></board-row>
+
+    <div class="row cell-row">
+      <div class="col">{{ totals.p1( players.p1 ) }}</div>
+      <div class="col">Totals</div>
+      <div class="col">{{ totals.p2( players.p2 ) }}</div>
+    </div>
+    <div class="horizontally-centered home-space-top" ng-if=" players.p2 === 'pc'">
+      <button class="button button-positive home-space-top" ng-click="simulatePcShoot()">
+        Simulate PC Shoot
+      </button>
+      <div class="item range range-balanced home-space-top">
+        <i class="icon ion-ios-bolt-outline"></i>
+        <input type="range" max="30" min="10" name="volume" ng-model="pcDifficulty.value">
+        <i class="icon ion-ios-bolt"></i>
+      </div>
+    </div>
+  </ion-content>
+</ion-view>

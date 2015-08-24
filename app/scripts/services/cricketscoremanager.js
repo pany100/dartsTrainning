@@ -9,28 +9,9 @@
  */
 angular.module('dartTrainningApp')
   .service('cricketScoreManager', function () {
-    var scores = {
-      'pc' : {
-        '20'     : 0,
-        '19'     : 0,
-        '18'     : 0,
-        '17'     : 0,
-        '16'     : 0,
-        '15'     : 0,
-        'center' : 0,
-        'points' : 0
-      },
-      'user' : {
-        '20'     : 0,
-        '19'     : 0,
-        '18'     : 0,
-        '17'     : 0,
-        '16'     : 0,
-        '15'     : 0,
-        'center' : 0,
-        'points' : 0
-      }
-    },
+    var scores = {},
+    p1,
+    p2,
     pointKeys = {
       'triple'      : 3,
       'double'      : 2,
@@ -41,11 +22,44 @@ angular.module('dartTrainningApp')
       'out'         : 0
     };
     return {
+      startMatch : function ( player1, player2 ) {
+        scores = {};
+        p1 = player1,
+        p2 = player2,
+        scores[p1] = {
+          '20'     : 0,
+          '19'     : 0,
+          '18'     : 0,
+          '17'     : 0,
+          '16'     : 0,
+          '15'     : 0,
+          'center' : 0,
+          'points' : 0
+        };
+        scores[p2] = {
+          '20'     : 0,
+          '19'     : 0,
+          '18'     : 0,
+          '17'     : 0,
+          '16'     : 0,
+          '15'     : 0,
+          'center' : 0,
+          'points' : 0
+        };
+      },
+      getPlayer1 : function () {
+        return p1;
+      },
+      getPlayer2 : function () {
+        return p2;
+      },
       processPoint : function ( player, target, points ) {
         var pointsObtained         = pointKeys[target],
             conditionToProcess     = scores[player][points] != null,
             isCenter               = target == 'bull' || target == 'outer',
-            oponentPlayer          = ( player == 'user' ) ? 'pc' : 'user';
+            oponentPlayer          = ( player == p1 ) ? p2 : p1;
+        console.log( target );
+        console.log( points );
         if ( isCenter ) {
           this.sumPointsToUser( player, oponentPlayer, 'center', pointsObtained);
         } else {
@@ -97,41 +111,36 @@ angular.module('dartTrainningApp')
       getUserScore : function ( player ) {
         return scores[player]['points'];
       },
+      getScores : function () {
+        return scores;
+      },
       resetCricket : function () {
-        var pcPoints   = scores['pc']['points'],
-            userPoints = scores['user']['points'];
-        scores = {
-          'pc' : {
-            '20'     : 0,
-            '19'     : 0,
-            '18'     : 0,
-            '17'     : 0,
-            '16'     : 0,
-            '15'     : 0,
-            'center' : 0,
-            'points' : pcPoints
-          },
-          'user' : {
-            '20'     : 0,
-            '19'     : 0,
-            '18'     : 0,
-            '17'     : 0,
-            '16'     : 0,
-            '15'     : 0,
-            'center' : 0,
-            'points' : userPoints
-          }
-        }
+        var p1Points = scores[p1]['points'],
+            p2Points = scores[p2]['points'];
+        scores[p1] = {
+          '20'     : 0,
+          '19'     : 0,
+          '18'     : 0,
+          '17'     : 0,
+          '16'     : 0,
+          '15'     : 0,
+          'center' : 0,
+          'points' : p1Points
+        };
+        scores[p2] = {
+          '20'     : 0,
+          '19'     : 0,
+          '18'     : 0,
+          '17'     : 0,
+          '16'     : 0,
+          '15'     : 0,
+          'center' : 0,
+          'points' : p2Points
+        };
       },
       resetScores : function () {
-        scores = {
-          'pc' : {
-            'points' : 0
-          },
-          'user' : {
-            'points' : 0
-          }
-        }
+        scores[p1]['points'] = 0;
+        scores[p2]['points'] = 0;
       }
     }
   });

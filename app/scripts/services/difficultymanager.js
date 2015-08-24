@@ -9,7 +9,7 @@
  */
 angular.module('dartTrainningApp')
   .service('difficultyManager', function () {
-    var difficultyIndex = 10;
+    var difficultyIndex = 20;
     return {
       setDifficulty: function( value ) {
         difficultyIndex = value;

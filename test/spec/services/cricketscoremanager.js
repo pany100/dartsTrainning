@@ -16,6 +16,7 @@ describe('Service: cricketScoreManager', function () {
   });
 
   it('close 20 test', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('user', 'triple', 20);
     expect(cricketScoreManager.getValuesForPoint('user', 20)).toBe(3);
     cricketScoreManager.processPoint('user', 'triple', 20);
@@ -33,6 +34,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('close 19 test', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('pc', 'double', 19);
     expect(cricketScoreManager.getUserScore('pc')).toBe(0);
     cricketScoreManager.processPoint('pc', 'double', 19);
@@ -43,6 +45,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('close 18 test', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('pc', 'double', 18);
     expect(cricketScoreManager.getUserScore('pc')).toBe(0);
     cricketScoreManager.processPoint('pc', 'double', 18);
@@ -53,6 +56,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('close 17 test', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('pc', 'double', 17);
     expect(cricketScoreManager.getUserScore('pc')).toBe(0);
     cricketScoreManager.processPoint('pc', 'double', 17);
@@ -65,6 +69,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('close 16 test', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('pc', 'double', 16);
     expect(cricketScoreManager.getUserScore('pc')).toBe(0);
     cricketScoreManager.processPoint('pc', 'double', 16);
@@ -75,6 +80,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('close 15 test', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('pc', 'double', 15);
     expect(cricketScoreManager.getUserScore('pc')).toBe(0);
     cricketScoreManager.processPoint('pc', 'double', 15);
@@ -85,6 +91,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('close center test', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('pc', 'bull', 15);
     expect(cricketScoreManager.getUserScore('pc')).toBe(0);
     cricketScoreManager.processPoint('pc', 'outer', 15);
@@ -102,6 +109,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('simulate cricket closed and restart', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('user', 'triple', 20);
     expect(cricketScoreManager.getValuesForPoint('user', 20)).toBe(3);
 
@@ -157,6 +165,7 @@ describe('Service: cricketScoreManager', function () {
   })
 
   it('simulate complete game and user won', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
     //First shoot
     cricketScoreManager.processPoint('user', 'triple', 20);
     expect(cricketScoreManager.getValuesForPoint('user', 20)).toBe(3);

@@ -22,18 +22,33 @@ angular.module('dartTrainningApp', ['ionic'])
   });
 })
 
-.config(function($stateProvider, $urlRouterProvider) {
+.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.backButton.text('').previousTitleText(false);
   $stateProvider
 
     .state('app', {
+      url: '/darts',
+      abstract: true,
+      templateUrl: "templates/commonView.html"
+    })
+    .state('app.main', {
       url: '/main',
       views: {
-        'main': {
+        'mainView': {
           templateUrl: 'templates/main.html',
           controller: 'MainCtrl'
         }
       }
+    })
+    .state('app.game', {
+      url: '/game',
+      views: {
+        'mainView': {
+          templateUrl: 'templates/game.html',
+          controller: 'GameCtrl'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/main');
+  $urlRouterProvider.otherwise('/darts/main');
 });

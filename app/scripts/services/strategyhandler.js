@@ -8,21 +8,21 @@
  * Service in the dartTrainningApp.
  */
 angular.module('dartTrainningApp')
-  .service('strategyHandler', function () {
+  .service('strategyHandler', function (cricketScoreManager) {
     var currentStrategy = {
-      'agresive'     : true,
-      'conservative' : false,
+      'aggresive'     : true,
       'defensive'    : false
     },
     strategyNumberFn = {
       'aggresive' : function(){
-        var readyToSum20         = scores['pc']['20'] === 3 && scores['user']['20'] < 3,
-            readyToSum19     = scores['pc']['19'] === 3 && scores['user']['19'] < 3,
-            readyToSum18     = scores['pc']['18'] === 3 && scores['user']['18'] < 3,
-            readyToSum17     = scores['pc']['17'] === 3 && scores['user']['17'] < 3,
-            readyToSum16     = scores['pc']['16'] === 3 && scores['user']['16'] < 3,
-            readyToSum15     = scores['pc']['15'] === 3 && scores['user']['15'] < 3,
-            readyToSumCenter = scores['pc']['center'] === 3 && scores['user']['center'] < 3;
+        var scores = cricketScoreManager.getScores(),
+            readyToSum20     = scores['pc']['20'] === 3 || scores['user']['20'] < 3,
+            readyToSum19     = scores['pc']['19'] === 3 || scores['user']['19'] < 3,
+            readyToSum18     = scores['pc']['18'] === 3 || scores['user']['18'] < 3,
+            readyToSum17     = scores['pc']['17'] === 3 || scores['user']['17'] < 3,
+            readyToSum16     = scores['pc']['16'] === 3 || scores['user']['16'] < 3,
+            readyToSum15     = scores['pc']['15'] === 3 || scores['user']['15'] < 3,
+            readyToSumCenter = scores['pc']['center'] === 3 || scores['user']['center'] < 3;
         if ( readyToSum20 ) {
           return {
             'points' : 20,
@@ -60,53 +60,9 @@ angular.module('dartTrainningApp')
           };
         }
       },
-      'conservative' : function(){
-        var open20     = scores['pc']['20'] === 3,
-            open19     = scores['pc']['19'] === 3,
-            open18     = scores['pc']['18'] === 3,
-            open17     = scores['pc']['17'] === 3,
-            open16     = scores['pc']['16'] === 3,
-            open15     = scores['pc']['15'] === 3,
-            openCenter = scores['pc']['center'] === 3;
-        if ( open20 ) {
-          return {
-            'points' : 20,
-            'target' : 'bigSingle'
-          }
-        } else if ( open19 ) {
-          return {
-            'points' : 29,
-            'target' : 'bigSingle'
-          }
-        } else if ( open18 ) {
-          return {
-            'points' : 18,
-            'target' : 'bigSingle'
-          }
-        } else if ( open17 ) {
-          return {
-            'points' : 17,
-            'target' : 'bigSingle'
-          }
-        } else if ( open16 ) {
-          return {
-            'points' : 16,
-            'target' : 'bigSingle'
-          }
-        } else if ( open15 ) {
-          return {
-            'points' : 15,
-            'target' : 'bigSingle'
-          }
-        } else {
-          return {
-            'points' : 14,
-            'target' : 'outer'
-          };
-        }
-      },
       'defensive' : function(){
-        var userReadyToSum20     = scores['user']['20'] === 3 && scores['pc']['20'] < 3,
+        var scores = cricketScoreManager.getScores(),
+            userReadyToSum20     = scores['user']['20'] === 3 && scores['pc']['20'] < 3,
             userReadyToSum19     = scores['user']['19'] === 3 && scores['pc']['19'] < 3,
             userReadyToSum18     = scores['user']['18'] === 3 && scores['pc']['18'] < 3,
             userReadyToSum17     = scores['user']['17'] === 3 && scores['pc']['17'] < 3,
@@ -155,28 +111,30 @@ angular.module('dartTrainningApp')
     return {
       setStrategyToAggresive : function () {
         currentStrategy['aggresive']    = true;
-        currentStrategy['conservative'] = false;
-        currentStrategy['defensive']    = false;
-      },
-      setStrategyToConservative : function () {
-        currentStrategy['aggresive']    = false;
-        currentStrategy['conservative'] = true;
         currentStrategy['defensive']    = false;
       },
       setStrategyToDefensive : function () {
         currentStrategy['aggresive']    = false;
-        currentStrategy['conservative'] = false;
         currentStrategy['defensive']    = true;
       },
       getCurrentStrategy : function() {
         if ( currentStrategy['aggresive'] === true ) {
           return 'aggresive';
         }
-        else if ( currentStrategy['conservative'] === true ) {
-          return 'conservative';
-        }
         else if ( currentStrategy['defensive'] === true ) {
           return 'defensive';
+        }
+      },
+      changeStrategyIfNeccesary : function() {
+        var scores = cricketScoreManager.getScores(),
+            pcWinningOrEqual      = scores['pc']['points'] > scores['user']['points'] ||
+                                    scores['pc']['points'] === scores['user']['points'],
+            userLessThan225       = scores['user']['points'] < 225,
+            differenceLessThan100 = scores['user']['points'] - scores['pc']['points'] < 100;
+        if ( pcWinningOrEqual || ( !pcWinningOrEqual && userLessThan225 && differenceLessThan100 ) ) {
+          this.setStrategyToAggresive();
+        } else {
+          this.setStrategyToDefensive();
         }
       },
       pickTarget : function () {

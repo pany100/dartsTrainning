@@ -8,12 +8,20 @@
  * Controller of the dartTrainningApp
  */
 angular.module('dartTrainningApp')
-  .controller('MainCtrl', function (shotCalculator, $scope) {
+  .controller('MainCtrl', function (cricketScoreManager, $scope, $state) {
 
-    var result = shotCalculator.simulateShoot( {
-      'points' : 20,
-      'target' : 'triple'
-    } );
-    console.log( result );
+    $scope.start1v1Game = function () {
+      cricketScoreManager.startMatch('user', 'user2');
+      goToGame();
+    }
+
+    $scope.start1vPCGame = function () {
+      cricketScoreManager.startMatch('user', 'pc');
+      goToGame();
+    }
+
+    function goToGame() {
+      $state.go( "app.game" );
+    }
 
   });

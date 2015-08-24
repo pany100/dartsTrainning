@@ -1,6 +1,14 @@
 <ion-view view-title="Main">
-  <ion-content>
-  this is balblabl
-
+  <ion-content class="main-content">
+    <h2 class="horizontally-centered home-space-top">Select Game Mode</h2>
+    <img src="images/dartboard.jpg" class="main-img">
+    <div class="choices horizontally-centered home-space-top">
+      <button class="button button-calm" ng-click="start1v1Game()">
+        1 vs 1
+      </button>
+      <button class="button button-balanced" ng-click="start1vPCGame()">
+        1 vs Droid
+      </button>
+    </div>
   </ion-content>
 </ion-view>

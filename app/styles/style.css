@@ -1,1 +1,24 @@
 /* Empty. Add your own CSS if you like */
+
+.main-content .horizontally-centered{
+  text-align: center;
+}
+.main-content .home-space-top {
+  margin-top: 60px;
+}
+
+.main-content img.main-img {
+  width: 350px;
+  margin-left: 9px;
+}
+
+.main-content .row {
+  text-align: center;
+}
+
+.main-content .cell-row .col {
+  border: 1px solid black;
+  height: 68px;
+  font-size: 33px;
+  padding-top: 20px;
+}
