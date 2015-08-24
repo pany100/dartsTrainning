@@ -46,17 +46,16 @@ angular.module('dartTrainningApp')
         template: pcShootResult
       });
       alertPopup.then(function(res) {
-        console.log("Closing popup");
+        cricketScoreManager.processPoint('pc', result.points, result.target);
+        if ( cricketScoreManager.hasUserWon( 'pc' ) ) {
+          var alertPopup = $ionicPopup.alert({
+             title: 'Game finished',
+             template: 'Pc has won'
+          });
+          alertPopup.then(function(res) {
+            cricketScoreManager.startMatch('user', 'pc');
+          });
+        }
       });
-      cricketScoreManager.processPoint('pc', result.points, result.target);
-      if ( cricketScoreManager.hasUserWon( 'pc' ) ) {
-        var alertPopup = $ionicPopup.alert({
-           title: 'Game finished',
-           template: 'Pc has won'
-        });
-        alertPopup.then(function(res) {
-          cricketScoreManager.startMatch('user', 'pc');
-        });
-      }
     }
   });

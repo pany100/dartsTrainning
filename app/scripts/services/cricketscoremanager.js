@@ -58,8 +58,6 @@ angular.module('dartTrainningApp')
             conditionToProcess     = scores[player][points] != null,
             isCenter               = target == 'bull' || target == 'outer',
             oponentPlayer          = ( player == p1 ) ? p2 : p1;
-        console.log( target );
-        console.log( points );
         if ( isCenter ) {
           this.sumPointsToUser( player, oponentPlayer, 'center', pointsObtained);
         } else {

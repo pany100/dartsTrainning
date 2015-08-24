@@ -21,10 +21,10 @@
       <div class="col">{{ totals.p2( players.p2 ) }}</div>
     </div>
     <div class="horizontally-centered" ng-if=" players.p2 === 'pc'">
-      <button class="button button-positive home-space-top" ng-click="simulatePcShoot()">
+      <button class="button button-positive game-space-top" ng-click="simulatePcShoot()">
         Simulate PC Shoot
       </button>
-      <div class="item range range-balanced">
+      <div class="item range range-balanced game-space-top">
         <h4>PC difficulty</h4>
         <i class="icon ion-ios-bolt-outline"></i>
         <input type="range" max="30" min="10" name="volume" ng-model="pcDifficulty.value">

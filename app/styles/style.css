@@ -7,6 +7,11 @@
   margin-top: 60px;
 }
 
+.main-content .game-space-top {
+  margin-top: 20px;
+}
+
+
 .main-content img.main-img {
   width: 350px;
   margin-left: 9px;
@@ -18,11 +23,15 @@
 
 .main-content .cell-row .col {
   border: 1px solid black;
-  height: 60px;
-  font-size: 33px;
-  padding-top: 20px;
+  height: 40px;
+  font-size: 25px;
+  padding-top: 11px;
 }
 
 .main-content .cell-row .col.img-score {
-  padding-top: 6px;
+  padding-top: 0px;
+}
+
+.main-content .cell-row .col.img-score img {
+  height: 35px;
 }

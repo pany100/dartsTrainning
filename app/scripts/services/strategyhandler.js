@@ -15,50 +15,87 @@ angular.module('dartTrainningApp')
     },
     strategyNumberFn = {
       'aggresive' : function(){
-        var scores = cricketScoreManager.getScores(),
-            readyToSum20     = scores['pc']['20'] === 3 || scores['user']['20'] < 3,
-            readyToSum19     = scores['pc']['19'] === 3 || scores['user']['19'] < 3,
-            readyToSum18     = scores['pc']['18'] === 3 || scores['user']['18'] < 3,
-            readyToSum17     = scores['pc']['17'] === 3 || scores['user']['17'] < 3,
-            readyToSum16     = scores['pc']['16'] === 3 || scores['user']['16'] < 3,
-            readyToSum15     = scores['pc']['15'] === 3 || scores['user']['15'] < 3,
-            readyToSumCenter = scores['pc']['center'] === 3 || scores['user']['center'] < 3;
-        if ( readyToSum20 ) {
-          return {
-            'points' : 20,
-            'target' : 'triple'
+        function getWeightForNumber( number ) {
+          var numberWeight = {
+            'center' : 1,
+            '20'     : 6,
+            '19'     : 5,
+            '18'     : 4,
+            '17'     : 3,
+            '16'     : 2,
+            '15'     : 1
+          },
+          scores         = cricketScoreManager.getScores(),
+          isClosed       = scores['user'][number] === 3,
+          pcClosed       = scores['pc'][number] === 3,
+          pcMoreThanUser = scores['pc'][number] > scores['pc'][number],
+          weight = 0;
+          if ( isClosed ) {
+            return weight;
+          } else {
+            weight += numberWeight[number];
+            if ( pcClosed ) {
+              weight += 3;
+            }
+            if ( pcMoreThanUser ) {
+              weight += 2;
+            }
+            return weight;
           }
-        } else if ( readyToSum19 ) {
-          return {
-            'points' : 29,
-            'target' : 'triple'
+        };
+        function getBestChoice ( weightsArray ) {
+          var maxElement, maxValue = 0;
+          for (var i = weightsArray.length - 1; i >= 0; i--) {
+            var currElement = weightsArray[i];
+            if ( currElement['weight'] >  maxValue ||
+                 ( currElement['weight'] === maxValue && currElement['number'] > maxElement['number']) ) {
+              maxElement = currElement;
+              maxValue = currElement['weight'];
+            }
           }
-        } else if ( readyToSum18 ) {
-          return {
-            'points' : 18,
-            'target' : 'triple'
+          if ( maxElement['number'] === 'center') {
+            return {
+              'points' : 14,
+              'target' : 'bull'
+            };
+          } else {
+            return {
+              'points' : parseInt(maxElement['number']),
+              'target' : 'triple'
+            }
           }
-        } else if ( readyToSum17 ) {
-          return {
-            'points' : 17,
-            'target' : 'triple'
+        };
+        var weights  = [
+          {
+            'weight' : getWeightForNumber('20'),
+            'number' : '20'
+          },
+          {
+            'weight' : getWeightForNumber('19'),
+            'number' : '19'
+          },
+          {
+            'weight' : getWeightForNumber('18'),
+            'number' : '18'
+          },
+          {
+            'weight' : getWeightForNumber('17'),
+            'number' : '17'
+          },
+          {
+            'weight' : getWeightForNumber('16'),
+            'number' : '16'
+          },
+          {
+            'weight' : getWeightForNumber('15'),
+            'number' : '15'
+          },
+          {
+            'weight' : getWeightForNumber('center'),
+            'number' : 'center'
           }
-        } else if ( readyToSum16 ) {
-          return {
-            'points' : 16,
-            'target' : 'triple'
-          }
-        } else if ( readyToSum15 ) {
-          return {
-            'points' : 15,
-            'target' : 'triple'
-          }
-        } else {
-          return {
-            'points' : 14,
-            'target' : 'bull'
-          };
-        }
+        ];
+        return getBestChoice( weights );
       },
       'defensive' : function(){
         var scores = cricketScoreManager.getScores(),
@@ -76,7 +113,7 @@ angular.module('dartTrainningApp')
           }
         } else if ( userReadyToSum19 ) {
           return {
-            'points' : 29,
+            'points' : 19,
             'target' : 'triple'
           }
         } else if ( userReadyToSum18 ) {

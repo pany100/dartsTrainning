@@ -102,5 +102,14 @@ describe('Service: strategyHandler', function () {
     expect(strategyHandler.getCurrentStrategy()).toBe('defensive');
   })
 
-
+  it('get next target', function () {
+    var target;
+    cricketScoreManager.startMatch( 'user', 'pc' );
+    expect(strategyHandler.getCurrentStrategy()).toBe('aggresive');
+    target = strategyHandler.pickTarget();
+    expect(target.points).toBe(20);
+    cricketScoreManager.processPoint('user', 'triple', 20);
+    target = strategyHandler.pickTarget();
+    expect(target.points).toBe(19);
+  })
 });
