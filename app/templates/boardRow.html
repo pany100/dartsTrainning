@@ -1,5 +1,5 @@
 <div class="row cell-row">
-  <div class="col img-score">
+  <div class="col col-40 img-score">
     <button class="button button-assertive left-button score-button" ng-click="removePoint()">
       -
     </button>
@@ -10,8 +10,8 @@
     <img class="left-img" src="images/2point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 2">
     <img class="left-img" src="images/3point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 3">
   </div>
-  <div class="col">{{ type }}</div>
-  <div class="col img-score">
+  <div class="col col-20">{{ type }}</div>
+  <div class="col col-40 img-score">
     <button class="button button-assertive right-button score-button" ng-click="removePointIfHuman()"
      ng-disabled="user2IsDroid()">
       -

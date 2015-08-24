@@ -2,9 +2,9 @@
   <ion-content  class="main-content">
     <h2 class="horizontally-centered">Scores</h2>
     <div class="row cell-row">
-      <div class="col">{{ players.p1 }}</div>
-      <div class="col"></div>
-      <div class="col">{{ players.p2 }}</div>
+      <div class="col col-40">{{ players.p1 }}</div>
+      <div class="col col-20"></div>
+      <div class="col col-40">{{ players.p2 }}</div>
     </div>
 
     <board-row type="20"></board-row>
@@ -16,9 +16,9 @@
     <board-row type="center"></board-row>
 
     <div class="row cell-row">
-      <div class="col">{{ totals.p1( players.p1 ) }}</div>
-      <div class="col">Totals</div>
-      <div class="col">{{ totals.p2( players.p2 ) }}</div>
+      <div class="col col-40">{{ totals.p1( players.p1 ) }}</div>
+      <div class="col col-20">Totals</div>
+      <div class="col col-40">{{ totals.p2( players.p2 ) }}</div>
     </div>
     <div class="horizontally-centered" ng-if=" players.p2 === 'pc'">
       <button class="button button-positive game-space-top" ng-click="simulatePcShoot()">

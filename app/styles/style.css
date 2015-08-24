@@ -23,7 +23,7 @@
 .main-content .cell-row .col {
   border: 1px solid black;
   height: 40px;
-  font-size: 25px;
+  font-size: 19px;
   padding-top: 11px;
 }
 
@@ -33,14 +33,6 @@
 
 .main-content .cell-row .col.img-score img {
   height: 35px;
-}
-
-.main-content .cell-row .col.img-score img.left-img {
-  padding-right: 77px;
-}
-
-.main-content .cell-row .col.img-score img.right-img {
-  padding-left: 77px;
 }
 
 .popup-content{
@@ -66,7 +58,7 @@
 }
 
 .score-button.left-button.margin-left {
-  margin-left: 20px;
+  margin-left: 7px;
 }
 
 .score-button.right-button {
@@ -74,5 +66,5 @@
 }
 
 .score-button.right-button.margin-right {
-  margin-right: 20px;
+  margin-right: 7px;
 }
