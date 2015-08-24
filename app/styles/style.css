@@ -18,7 +18,11 @@
 
 .main-content .cell-row .col {
   border: 1px solid black;
-  height: 68px;
+  height: 60px;
   font-size: 33px;
   padding-top: 20px;
+}
+
+.main-content .cell-row .col.img-score {
+  padding-top: 6px;
 }

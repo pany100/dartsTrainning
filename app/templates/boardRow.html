@@ -1,11 +1,11 @@
 <div class="row cell-row">
-  <div class="col" on-tap="addPoint()">
+  <div class="col img-score" on-tap="addPoint()">
     <img src="images/1point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 1">
     <img src="images/2point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 2">
     <img src="images/3point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 3">
   </div>
   <div class="col">{{ type }}</div>
-  <div class="col" ng-class="{disabled: isPcUser}" on-tap="addPointIfHuman()">
+  <div class="col img-score" on-tap="addPointIfHuman()">
     <img src="images/1point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 1">
     <img src="images/2point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 2">
     <img src="images/3point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 3">
