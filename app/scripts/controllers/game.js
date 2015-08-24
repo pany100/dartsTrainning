@@ -21,10 +21,33 @@ angular.module('dartTrainningApp')
       value : difficultyManager.getDifficulty()
     }
     $scope.simulatePcShoot = function () {
-      var aim, result;
+      var aim, result,
+          keys = {
+            'triple'      : 'triple',
+            'double'      : 'double',
+            'smallSingle' : 'single',
+            'bigSingle'   : 'single',
+            'bull'        : 'red center',
+            'outer'       : 'green center',
+            'out'         : 'out'
+          },
+          pcShootResult;
       strategyHandler.changeStrategyIfNeccesary();
       aim = strategyHandler.pickTarget();
       result = shotCalculator.simulateShoot( aim );
+      pcShootResult = keys[result.points];
+      if ( pcShootResult === 'triple' ||
+           pcShootResult === 'double' ||
+           pcShootResult === 'single') {
+        pcShootResult += " " + result.target;
+      }
+      var alertPopup = $ionicPopup.alert({
+        title: 'PC-Shoot',
+        template: pcShootResult
+      });
+      alertPopup.then(function(res) {
+        console.log("Closing popup");
+      });
       cricketScoreManager.processPoint('pc', result.points, result.target);
       if ( cricketScoreManager.hasUserWon( 'pc' ) ) {
         var alertPopup = $ionicPopup.alert({
