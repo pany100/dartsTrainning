@@ -18,10 +18,10 @@ angular.module('dartTrainningApp')
         return difficultyIndex;
       },
       getDistanceDeviation: function() {
-        return ( 31 - difficultyIndex ) * 1200;
+        return ( 31 - difficultyIndex ) * 1500;
       },
       getRadiansDeviation: function() {
-        return ( 31 - difficultyIndex ) * 1200;
+        return ( 31 - difficultyIndex ) * 1500;
       }
     }
   });

@@ -15,8 +15,8 @@ angular.module('dartTrainningApp')
       'double'      : 'double',
       'smallSingle' : 'single',
       'bigSingle'   : 'single',
-      'bull'        : 'red center',
-      'outer'       : 'green center',
+      'bull'        : 'bull',
+      'outer'       : 'outer',
       'out'         : 'out'
     };
     $scope.pcShootResult = [];
@@ -27,10 +27,13 @@ angular.module('dartTrainningApp')
     $scope.totals = {
       p1 : cricketScoreManager.getUserScore,
       p2 : cricketScoreManager.getUserScore
-    }
+    };
     $scope.pcDifficulty = {
       value : difficultyManager.getDifficulty()
-    }
+    };
+    $scope.$watch('pcDifficulty.value', function( newValue, oldValue ) {
+      difficultyManager.setDifficulty( newValue );
+    });
     function simulateSingleShot() {
         var aim, result, shotResult;
         strategyHandler.changeStrategyIfNeccesary();
@@ -45,7 +48,7 @@ angular.module('dartTrainningApp')
           });
         } else {
           $scope.pcShootResult.push({
-            'result' : " " + result.target
+            'result' : " " + shotResult
           });
         }
         cricketScoreManager.processPoint('pc', result.points, result.target);

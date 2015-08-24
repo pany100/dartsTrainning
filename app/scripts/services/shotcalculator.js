@@ -11,6 +11,8 @@ angular.module('dartTrainningApp')
   .service('shotCalculator', function (dartboardDistances, difficultyManager) {
     return {
       simulateShoot: function( aim ) {
+        console.log( difficultyManager.getRadiansDeviation() );
+        console.log( difficultyManager.getDistanceDeviation() );
         var optimalTarget = dartboardDistances.getOptimalDistanceForTarget( aim.target, aim.points ),
             distanceCalc  = this.distribution( optimalTarget.distance, difficultyManager.getDistanceDeviation() , true),
             radiansCalc   = this.distribution( optimalTarget.radians, difficultyManager.getRadiansDeviation() );
