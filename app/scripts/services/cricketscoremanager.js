@@ -10,6 +10,7 @@
 angular.module('dartTrainningApp')
   .service('cricketScoreManager', function () {
     var scores = {},
+    pointsWithNumberClosed = {},
     p1,
     p2,
     pointKeys = {
@@ -36,7 +37,27 @@ angular.module('dartTrainningApp')
           'center' : 0,
           'points' : 0
         };
+        pointsWithNumberClosed[p1] = {
+          '20'     : 0,
+          '19'     : 0,
+          '18'     : 0,
+          '17'     : 0,
+          '16'     : 0,
+          '15'     : 0,
+          'center' : 0,
+          'points' : 0
+        };
         scores[p2] = {
+          '20'     : 0,
+          '19'     : 0,
+          '18'     : 0,
+          '17'     : 0,
+          '16'     : 0,
+          '15'     : 0,
+          'center' : 0,
+          'points' : 0
+        };
+        pointsWithNumberClosed[p2] = {
           '20'     : 0,
           '19'     : 0,
           '18'     : 0,
@@ -52,6 +73,25 @@ angular.module('dartTrainningApp')
       },
       getPlayer2 : function () {
         return p2;
+      },
+      removePoint : function ( player, pointToRemove ) {
+        var moreThanThree     = pointsWithNumberClosed[player][pointToRemove] > 0,
+            isThree           = pointsWithNumberClosed[player][pointToRemove] === 0 && scores[player][pointToRemove] === 3,
+            lessThanThree     = pointsWithNumberClosed[player][pointToRemove] === 0 && scores[player][pointToRemove] < 3,
+            shotsMoreThanZero = scores[player][pointToRemove] === 0,
+            scoreGreaterThan0 = scores[player]['points'] > 0;
+        if ( lessThanThree || isThree ) {
+          if ( !shotsMoreThanZero ) {
+            scores[player][pointToRemove]--;
+          }
+        } else if ( moreThanThree ) {
+          pointsWithNumberClosed[player][pointToRemove]--;
+          if ( pointToRemove === 'center' && scoreGreaterThan0 ) {
+            scores[player]['points'] -= 25;
+          } else if ( scoreGreaterThan0 ){
+            scores[player]['points'] -= pointToRemove;
+          }
+        }
       },
       processPoint : function ( player, target, points ) {
         var pointsObtained         = pointKeys[target],
@@ -75,6 +115,7 @@ angular.module('dartTrainningApp')
           scores[currentPlayer][points] = 3;
           if ( !this.assignIfCricketClosed (currentPlayer) ) {
             var extraPoints = ( playerScoreInPoint + pointsObtained - 3 );
+            pointsWithNumberClosed[currentPlayer][points] += extraPoints;
             if ( oponentScoreInPoint < 3 ) {
               var pointsToSum = points === 'center' ? 25 : +points;
               pointsToSum = pointsToSum * extraPoints;
@@ -112,29 +153,55 @@ angular.module('dartTrainningApp')
       getScores : function () {
         return scores;
       },
+      getExtraScores : function() {
+        return pointsWithNumberClosed;
+      },
+      getExtraScoresPointsForUser: function ( player, number ) {
+        return pointsWithNumberClosed[player][number];
+      },
       resetCricket : function () {
         var p1Points = scores[p1]['points'],
             p2Points = scores[p2]['points'];
-        scores[p1] = {
-          '20'     : 0,
-          '19'     : 0,
-          '18'     : 0,
-          '17'     : 0,
-          '16'     : 0,
-          '15'     : 0,
-          'center' : 0,
-          'points' : p1Points
-        };
-        scores[p2] = {
-          '20'     : 0,
-          '19'     : 0,
-          '18'     : 0,
-          '17'     : 0,
-          '16'     : 0,
-          '15'     : 0,
-          'center' : 0,
-          'points' : p2Points
-        };
+          scores[p1] = {
+            '20'     : 0,
+            '19'     : 0,
+            '18'     : 0,
+            '17'     : 0,
+            '16'     : 0,
+            '15'     : 0,
+            'center' : 0,
+            'points' : p1Points
+          };
+          scores[p2] = {
+            '20'     : 0,
+            '19'     : 0,
+            '18'     : 0,
+            '17'     : 0,
+            '16'     : 0,
+            '15'     : 0,
+            'center' : 0,
+            'points' : p2Points
+          };
+          pointsWithNumberClosed[p1] = {
+            '20'     : 0,
+            '19'     : 0,
+            '18'     : 0,
+            '17'     : 0,
+            '16'     : 0,
+            '15'     : 0,
+            'center' : 0,
+            'points' : 0
+          };
+          pointsWithNumberClosed[p2] = {
+            '20'     : 0,
+            '19'     : 0,
+            '18'     : 0,
+            '17'     : 0,
+            '16'     : 0,
+            '15'     : 0,
+            'center' : 0,
+            'points' : 0
+          };
       },
       resetScores : function () {
         scores[p1]['points'] = 0;

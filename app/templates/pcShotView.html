@@ -1,0 +1,8 @@
+<div class="popup-content">
+  <div ng-repeat="shoot in pcShootResult">
+    <p>{{shoot.result}}</p>
+  </div>
+  <button ng-if="enableButtonPopup" class="horizontally-centered button button-balanced" ng-click="closeShotPopup()">
+    Close
+  </button>
+</div>

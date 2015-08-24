@@ -15,6 +15,42 @@ describe('Service: cricketScoreManager', function () {
     expect(!!cricketScoreManager).toBe(true);
   });
 
+  it('remove 20 from user', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
+    expect(cricketScoreManager.getValuesForPoint('user', 20)).toBe(0);
+    cricketScoreManager.removePoint('user', '20');
+    expect(cricketScoreManager.getValuesForPoint('user', 20)).toBe(0);
+    cricketScoreManager.processPoint('user', 'triple', 20);
+    expect(cricketScoreManager.getValuesForPoint('user', 20)).toBe(3);
+    cricketScoreManager.removePoint('user', '20');
+    expect(cricketScoreManager.getValuesForPoint('user', 20)).toBe(2);
+    cricketScoreManager.processPoint('user', 'triple', 20);
+    expect(cricketScoreManager.getUserScore('user')).toBe(40);
+    expect(cricketScoreManager.getExtraScoresPointsForUser('user','20')).toBe(2);
+  })
+
+  it('remove center from user', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
+    cricketScoreManager.processPoint('user', 'bull', 20);
+    expect(cricketScoreManager.getValuesForPoint('user', 'center')).toBe(2);
+    cricketScoreManager.removePoint('user', 'center');
+    expect(cricketScoreManager.getValuesForPoint('user', 'center')).toBe(1);
+  })
+
+  it('remove center from user', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
+    cricketScoreManager.processPoint('user', 'bull', 20);
+    cricketScoreManager.processPoint('user', 'bull', 20);
+    expect(cricketScoreManager.getValuesForPoint('user', 'center')).toBe(3);
+    expect(cricketScoreManager.getExtraScoresPointsForUser('user','center')).toBe(1);
+    cricketScoreManager.processPoint('user', 'bull', 20);
+    expect(cricketScoreManager.getValuesForPoint('user', 'center')).toBe(3);
+    expect(cricketScoreManager.getExtraScoresPointsForUser('user','center')).toBe(3);
+    expect(cricketScoreManager.getUserScore('user')).toBe(75);
+    cricketScoreManager.removePoint('user', 'center');
+    expect(cricketScoreManager.getUserScore('user')).toBe(50);
+  })
+
   it('close 20 test', function () {
     cricketScoreManager.startMatch( 'user', 'pc' );
     cricketScoreManager.processPoint('user', 'triple', 20);

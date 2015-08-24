@@ -22,6 +22,9 @@ angular.module('dartTrainningApp')
         };
         scope.getValuesForPointP1 = cricketScoreManager.getValuesForPoint;
         scope.getValuesForPointP2 = cricketScoreManager.getValuesForPoint;
+        scope.user2IsDroid = function () {
+          return scope.players.p2 === 'pc';
+        };
         scope.addPoint = function () {
           cricketScoreManager.sumPointsToUser( scope.players.p1,
                                                scope.players.p2,
@@ -37,7 +40,12 @@ angular.module('dartTrainningApp')
                                               scope.players.p2 );
             });
           }
-        }
+        };
+        scope.removePoint = function () {
+          cricketScoreManager.removePoint( scope.players.p1,
+                                           scope.type);
+        };
+
         scope.addPointIfHuman = function () {
           if ( scope.players.p2 != 'pc' ) {
             cricketScoreManager.sumPointsToUser( scope.players.p2,
@@ -54,6 +62,13 @@ angular.module('dartTrainningApp')
               cricketScoreManager.startMatch( scope.players.p1,
                                               scope.players.p2 );
             });
+          }
+        };
+
+        scope.removePointIfHuman = function () {
+          if ( scope.players.p2 != 'pc' ) {
+            cricketScoreManager.removePoint( scope.players.p2,
+                                             scope.type);
           }
         }
       }

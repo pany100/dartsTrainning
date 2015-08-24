@@ -1,13 +1,27 @@
 <div class="row cell-row">
-  <div class="col img-score" on-tap="addPoint()">
-    <img src="images/1point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 1">
-    <img src="images/2point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 2">
-    <img src="images/3point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 3">
+  <div class="col img-score">
+    <button class="button button-assertive left-button score-button" ng-click="removePoint()">
+      -
+    </button>
+    <button class="button button-balanced left-button score-button margin-left" ng-click="addPoint()">
+      +
+    </button>
+    <img class="left-img" src="images/1point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 1">
+    <img class="left-img" src="images/2point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 2">
+    <img class="left-img" src="images/3point.jpg" ng-if="getValuesForPointP1( players.p1, type ) == 3">
   </div>
   <div class="col">{{ type }}</div>
-  <div class="col img-score" on-tap="addPointIfHuman()">
-    <img src="images/1point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 1">
-    <img src="images/2point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 2">
-    <img src="images/3point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 3">
+  <div class="col img-score">
+    <button class="button button-assertive right-button score-button" ng-click="removePointIfHuman()"
+     ng-disabled="user2IsDroid()">
+      -
+    </button>
+    <button class="button button-balanced right-button score-button  margin-right" ng-click="addPointIfHuman()"
+     ng-disabled="user2IsDroid()">
+      +
+    </button>
+    <img class="right-img" src="images/1point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 1">
+    <img class="right-img" src="images/2point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 2">
+    <img class="right-img" src="images/3point.jpg" ng-if="getValuesForPointP2( players.p2, type ) == 3">
   </div>
 </div>

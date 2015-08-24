@@ -11,7 +11,6 @@
   margin-top: 20px;
 }
 
-
 .main-content img.main-img {
   width: 350px;
   margin-left: 9px;
@@ -34,4 +33,46 @@
 
 .main-content .cell-row .col.img-score img {
   height: 35px;
+}
+
+.main-content .cell-row .col.img-score img.left-img {
+  padding-right: 77px;
+}
+
+.main-content .cell-row .col.img-score img.right-img {
+  padding-left: 77px;
+}
+
+.popup-content{
+  text-align: center;
+}
+
+.score-button {
+  height: 30px;
+  min-height: 30px;
+  width: 30px;
+  min-width: 30px;
+  padding-top: 0px;
+  line-height: 7px;
+  margin-top: 4px;
+}
+
+.score-button.button-balanced {
+  padding-left: 10px;
+}
+
+.score-button.left-button {
+  float: left;
+}
+
+.score-button.left-button.margin-left {
+  margin-left: 20px;
+}
+
+.score-button.right-button {
+  float: right;
+}
+
+.score-button.right-button.margin-right {
+  margin-right: 20px;
 }
