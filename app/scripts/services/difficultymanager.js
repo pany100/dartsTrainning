@@ -22,6 +22,9 @@ angular.module('dartTrainningApp')
       },
       getRadiansDeviation: function() {
         return ( 31 - difficultyIndex ) * 1500;
+      },
+      getLimitsForTarget : function ( target ) {
+        return 15875 - ( 317.5 * difficultyIndex );
       }
     }
   });

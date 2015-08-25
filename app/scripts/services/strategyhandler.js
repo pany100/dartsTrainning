@@ -44,8 +44,9 @@ angular.module('dartTrainningApp')
           }
         };
         function getBestChoice ( weightsArray ) {
-          var maxElement, maxValue = 0;
-          for (var i = weightsArray.length - 1; i >= 0; i--) {
+          var maxElement = weightsArray[weightsArray.length - 1],
+              maxValue = maxElement['weight'];
+          for (var i = weightsArray.length - 2; i >= 0; i--) {
             var currElement = weightsArray[i];
             if ( currElement['weight'] >  maxValue ||
                  ( currElement['weight'] === maxValue && currElement['number'] > maxElement['number']) ) {

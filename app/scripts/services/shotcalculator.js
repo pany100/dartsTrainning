@@ -14,12 +14,13 @@ angular.module('dartTrainningApp')
           return Math.floor(Math.random() * (max - min + 1)) + min;
       },
       simulateShoot: function( aim ) {
-        var limitsForTarget = dartboardDistances.getLimitsForTarget( aim.target ),
-            optimalTarget = dartboardDistances.getOptimalDistanceForTarget( aim.target, aim.points ),
-            pulseDistance = this.getRandomInt( optimalTarget.distance - limitsForTarget, optimalTarget.distance + limitsForTarget ),
-            distanceCalc  = this.distribution( pulseDistance, difficultyManager.getDistanceDeviation() , true),
-            radiansCalc   = this.distribution( optimalTarget.radians, difficultyManager.getRadiansDeviation() ),
-            shotResult    = dartboardDistances.getResult( distanceCalc, radiansCalc );
+        var limitsForTarget  = difficultyManager.getLimitsForTarget(),
+            optimalTarget    = dartboardDistances.getOptimalDistanceForTarget( aim.target, aim.points ),
+            pulseDistance    = this.getRandomInt( optimalTarget.distance - limitsForTarget, optimalTarget.distance + limitsForTarget ),
+            distanceCalc     = this.distribution( pulseDistance, difficultyManager.getDistanceDeviation() , true),
+            radiansCalc      = this.distribution( optimalTarget.radians, difficultyManager.getRadiansDeviation() ),
+            shotResult       = dartboardDistances.getResult( distanceCalc, radiansCalc );
+        console.log( limitsForTarget );
         return shotResult;
       },
       distribution : function ( media, desvio , withModule) {
