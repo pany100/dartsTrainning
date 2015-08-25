@@ -142,7 +142,7 @@ angular.module('dartTrainningApp')
         return false;
       },
       hasUserWon : function ( currentPlayer ) {
-        return scores[currentPlayer]['points'] > 300;
+        return scores[currentPlayer]['points'] >= 300;
       },
       getValuesForPoint : function( currentPlayer, number ) {
         return scores[currentPlayer][number];
