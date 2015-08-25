@@ -29,6 +29,9 @@ angular.module('dartTrainningApp')
         }
         return returnObject;
       },
+      getLimitsForTarget : function ( target ) {
+        return distances[target].max - distances[target].min;
+      },
       getResult : function( distanceCalc, radiansCalc ) {
         var points = this.getDistanceInterval( distanceCalc, distances ),
             target = this.getRadiansInterval( radiansCalc, radians ),
