@@ -9,7 +9,7 @@
  */
 angular.module('dartTrainningApp')
   .controller('GameCtrl', function ($scope, cricketScoreManager, difficultyManager,
-                                    strategyHandler, physicalShotCalculator, $ionicPopup, $interval, $timeout) {
+                                    targetRules, physicalShotCalculator, $ionicPopup, $interval, $timeout) {
     var keys = {
       'triple'      : 'triple',
       'double'      : 'double',
@@ -36,11 +36,9 @@ angular.module('dartTrainningApp')
     });
     function simulateSingleShot() {
         var aim, result, shotResult;
-        strategyHandler.changeStrategyIfNeccesary();
-        aim = strategyHandler.pickTarget();
+        aim = targetRules.pickTarget();
         result = physicalShotCalculator.simulateShoot( aim );
         shotResult = keys[result.points];
-        console.log(shotResult);
         if ( shotResult === 'triple' ||
              shotResult === 'double' ||
              shotResult === 'single') {
