@@ -39,38 +39,31 @@ angular.module('dartTrainningApp')
             isCenterOpen          = scores['user']['center'] < 3 && scores['pc']['center'] < 3;
         //PC WINNING AND READY TO SUM
         if ( ( pcWinningOrEqual ||
-             (!pcWinningOrEqual && userLessThan225) ||
-             (!pcWinningOrEqual && differenceLessThan100) ) && pcReadyToSum20 ) {
+             (!pcWinningOrEqual && userLessThan225 && differenceLessThan100) ) && pcReadyToSum20 ) {
           return this.buildResponse( 20, 'triple' );
         }
         if ( ( pcWinningOrEqual ||
-             (!pcWinningOrEqual && userLessThan225) ||
-             (!pcWinningOrEqual && differenceLessThan100) ) && pcReadyToSum19 ) {
+             (!pcWinningOrEqual && userLessThan225 && differenceLessThan100) ) && pcReadyToSum19 ) {
           return this.buildResponse( 19, 'triple' );
         }
         if ( ( pcWinningOrEqual ||
-             (!pcWinningOrEqual && userLessThan225) ||
-             (!pcWinningOrEqual && differenceLessThan100) ) && pcReadyToSum18 ) {
+             (!pcWinningOrEqual && userLessThan225 && differenceLessThan100) ) && pcReadyToSum18 ) {
           return this.buildResponse( 18, 'triple' );
         }
         if ( ( pcWinningOrEqual ||
-             (!pcWinningOrEqual && userLessThan225) ||
-             (!pcWinningOrEqual && differenceLessThan100) ) && pcReadyToSum17 ) {
+             (!pcWinningOrEqual && userLessThan225 && differenceLessThan100) ) && pcReadyToSum17 ) {
           return this.buildResponse( 17, 'triple' );
         }
         if ( ( pcWinningOrEqual ||
-             (!pcWinningOrEqual && userLessThan225) ||
-             (!pcWinningOrEqual && differenceLessThan100) ) && pcReadyToSum16 ) {
+             (!pcWinningOrEqual && userLessThan225 && differenceLessThan100) ) && pcReadyToSum16 ) {
           return this.buildResponse( 16, 'triple' );
         }
         if ( ( pcWinningOrEqual ||
-             (!pcWinningOrEqual && userLessThan225) ||
-             (!pcWinningOrEqual && differenceLessThan100) ) && pcReadyToSumCenter ) {
+             (!pcWinningOrEqual && userLessThan225 && differenceLessThan100) ) && pcReadyToSumCenter ) {
           return this.buildResponse( 14, 'bull' );
         }
         if ( ( pcWinningOrEqual ||
-             (!pcWinningOrEqual && userLessThan225) ||
-             (!pcWinningOrEqual && differenceLessThan100) ) && pcReadyToSum15 ) {
+             (!pcWinningOrEqual && userLessThan225 && differenceLessThan100) ) && pcReadyToSum15 ) {
           return this.buildResponse( 15, 'triple' );
         }
 

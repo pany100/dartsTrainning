@@ -83,6 +83,29 @@ describe('Service: targetRules', function () {
 
   })
 
+ it('aggresive strategy', function () {
+    cricketScoreManager.startMatch( 'user', 'pc' );
+    cricketScoreManager.processPoint('pc', 'triple', 20);
+    cricketScoreManager.processPoint('pc', 'triple', 20);
+    cricketScoreManager.processPoint('pc', 'triple', 20);
+    cricketScoreManager.processPoint('pc', 'triple', 20);
+    cricketScoreManager.processPoint('pc', 'triple', 20);
+    var target = targetRules.pickTarget();
+    expect(target.points).toBe(20);
+    expect(target.target).toBe('triple');
+
+    cricketScoreManager.processPoint('user', 'triple', 19);
+    cricketScoreManager.processPoint('user', 'triple', 19);
+    cricketScoreManager.processPoint('user', 'triple', 19);
+    cricketScoreManager.processPoint('user', 'triple', 19);
+    cricketScoreManager.processPoint('user', 'triple', 19);
+    cricketScoreManager.processPoint('user', 'triple', 19);
+    var target = targetRules.pickTarget();
+    expect(target.points).toBe(19);
+    expect(target.target).toBe('triple');
+
+  })
+
 
 
 });
