@@ -19,13 +19,13 @@ angular.module('dartTrainningApp')
       getInitialYSpeed : function ( aim ) {
         var optimalYSpeed = this.getOptimalYSpeed( aim ),
                      axis = 30 - difficultyManager.getDifficulty(),
-        standardDeviation = axis * 1.25 + 20,
+        standardDeviation = axis * 8.25 + 20,
                simulation = statisticsHelper.distribution( optimalYSpeed, standardDeviation );
         return simulation;
       },
       getInitialXSpeed : function ( ) {
         var          axis = 30 - difficultyManager.getDifficulty(),
-        standardDeviation = axis * 1.25 + 25,
+        standardDeviation = axis * 5.25 + 25,
                simulation = statisticsHelper.distribution( 0, standardDeviation );
         return simulation;
       },

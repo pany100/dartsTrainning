@@ -17,10 +17,11 @@ describe('Service: physicalShotCalculator', function () {
 
   it('simulate bull', function () {
     for (var i = 20; i >= 0; i--) {
-      physicalShotCalculator.simulateShoot( {
+      var result = physicalShotCalculator.simulateShoot( {
         'points' : 19,
         'target' : 'triple'
       });
+      console.log(result);
     };
   });
 
