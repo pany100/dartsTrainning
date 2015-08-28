@@ -38,8 +38,8 @@ angular.module('dartTrainningApp')
         }
 
         function drawDart( value ) {
-          var x = cuadraticTransf( value.xf ) + 175,
-              y = 175 - cuadraticTransf( value.yf ),
+          var x = 0.783625731 * value.xf + 175,
+              y = 175 - 0.783625731 * value.yf,
               radius= 2,
               color = '#0099FF';
           ctx.beginPath();
@@ -47,12 +47,6 @@ angular.module('dartTrainningApp')
           ctx.closePath();
           ctx.fillStyle = color;
           ctx.fill();
-        }
-
-        function cuadraticTransf ( value ) {
-          var firstTerm = -0.00008693868 * Math.pow( value, 2 ),
-              secTerm   = 0.79010434 * value;
-          return firstTerm + secTerm;
         }
 
       }
