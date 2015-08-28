@@ -2,10 +2,10 @@
 
 describe('Service: targetRules', function () {
 
-  // load the service's module
+  /* load the services module*/
   beforeEach(module('dartTrainningApp'));
 
-  // instantiate service
+  /*instantiate service*/
   var targetRules;
   beforeEach(inject(function (_targetRules_, _cricketScoreManager_) {
     targetRules = _targetRules_;

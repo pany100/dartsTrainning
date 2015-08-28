@@ -18,14 +18,13 @@ angular.module('dartTrainningApp')
       },
       getInitialYSpeed : function ( aim ) {
         var optimalYSpeed = this.getOptimalYSpeed( aim ),
-                     axis = 30 - difficultyManager.getDifficulty(),
-        standardDeviation = axis * 8.25 + 20,
+        standardDeviation = -2 * difficultyManager.getDifficulty() + 75,
                simulation = statisticsHelper.distribution( optimalYSpeed, standardDeviation );
         return simulation;
       },
       getInitialXSpeed : function ( ) {
-        var          axis = 30 - difficultyManager.getDifficulty(),
-        standardDeviation = axis * 5.25 + 25,
+        var          axis = difficultyManager.getDifficulty(),
+        standardDeviation = -2 * difficultyManager.getDifficulty() + 75,
                simulation = statisticsHelper.distribution( 0, standardDeviation );
         return simulation;
       },
@@ -34,7 +33,7 @@ angular.module('dartTrainningApp')
         return result.x;
       },
       getYFinalSimulation : function ( aim ) {
-        var yf = this.getInitialConditions() +
+        var yf = this.getInitialYPos( aim ) +
                  this.getInitialYSpeed( aim ) * this.getDartInAir() -
                  0.5 * this.getGravityConstant() * Math.pow( this.getDartInAir(), 2 );
         return yf;
@@ -45,16 +44,15 @@ angular.module('dartTrainningApp')
       getGravityConstant : function( ) {
         return 9.81;
       },
-      getInitialConditions : function () {
-        return 0;
+      getInitialYPos : function ( aim ) {
+        var result = physicalDistances.getOptimalDistanceForTarget( aim.target, aim.points );
+        return result.y;
       },
       getDartInAir : function ( ) {
         return 0.4;
       },
       getOptimalYSpeed: function( aim ) {
-        var distance = physicalDistances.getOptimalDistanceForTarget( aim.target, aim.points ),
-                  yf = distance.y,
-       optimalYSpeed = (yf - 0.5 * this.getGravityConstant() * Math.pow( this.getDartInAir(), 2 )) / this.getDartInAir();
+        var  optimalYSpeed = 0.5 * this.getGravityConstant() * this.getDartInAir();
         return optimalYSpeed;
       }
     }

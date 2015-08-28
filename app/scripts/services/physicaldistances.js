@@ -67,6 +67,9 @@ angular.module('dartTrainningApp')
         if ( x < 0 && y < 0 ) {
           return (Math.atan(y/x) * (180 / Math.PI)) + 180;
         }
+        if ( x === 0 && y === 0) {
+          return 90;
+        }
       },
       getDistanceInterval : function( pivot, object ) {
         for (var key in object) {
