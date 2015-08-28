@@ -70,24 +70,34 @@ describe('Service: physicalShotCalculator', function () {
     testExactValueWithDifficulty( 20, 'triple', 30 );
   });
 
+  it('simulate 20 with difficulty 30', function () {
+    testNumberOk( 20, 30 );
+    testNumberOk( 20, 30 );
+    testNumberOk( 20, 30 );
+    testNumberOk( 20, 20 );
+    testNumberOk( 20, 20 );
+    testNumberOk( 20, 20 );
+  });
+
   function testExactValueWithDifficulty ( number, points, difficulty ) {
     var expectedValues =
       {
         'points' : points,
         'sum' : 1
-      },
-      sum = 0;
+      }, total = 0;
     difficultyManager.setDifficulty( difficulty );
-    for (var i = 210; i >= 0; i--) {
-      var result = physicalShotCalculator.simulateShoot( {
-        'points' : number,
-        'target' : points
-      });
-      if ( result.points == points ) {
-        sum += expectedValues.sum;
-      }
+    for (var i = 99; i >= 0; i--) {
+      for (var j = 2; j >= 0; j--) {
+        var result = physicalShotCalculator.simulateShoot( {
+          'points' : number,
+          'target' : points
+        });
+        if ( result.points == points ) {
+          total += expectedValues.sum;
+        }
+      };
     };
-    console.log( points + ', '+ number + ' with difficulty '+difficulty+': ' + sum );
+    console.log( points + ', '+ number + ' with difficulty '+difficulty+': ' + total/100 );
   }
 
   function testBullWithDifficulty( difficulty ) {
@@ -99,20 +109,22 @@ describe('Service: physicalShotCalculator', function () {
         'points' : 'outer',
         'sum' : 1
       },
-      sum = 0;
+      total = 0;
     difficultyManager.setDifficulty( difficulty );
-    for (var i = 210; i >= 0; i--) {
-      var result = physicalShotCalculator.simulateShoot( {
-        'points' : 20,
-        'target' : 'bull'
-      });
-      if ( result.points === expectedValue.points ) {
-        sum += expectedValue.sum;
-      } else if ( result.points === secExpectedValue.points ) {
-        sum += secExpectedValue.sum;
-      }
+    for (var i = 99; i >= 0; i--) {
+      for (var j = 2; j >= 0; j--) {
+        var result = physicalShotCalculator.simulateShoot( {
+          'points' : 20,
+          'target' : 'bull'
+        });
+        if ( result.points === expectedValue.points ) {
+          total += expectedValue.sum;
+        } else if ( result.points === secExpectedValue.points ) {
+          total += secExpectedValue.sum;
+        }
+      };
     };
-    console.log( 'Bulls with difficulty '+difficulty+': ' + sum );
+    console.log( 'Bulls with difficulty '+difficulty+': ' + total/100 );
   }
 
   function testNumberObjective( number, difficulty ) {
@@ -134,20 +146,41 @@ describe('Service: physicalShotCalculator', function () {
         'sum' : 3
       }
     ],
-    sum = 0;
+    total = 0;
     difficultyManager.setDifficulty( difficulty );
-    for (var i = 210; i >= 0; i--) {
-      var result = physicalShotCalculator.simulateShoot( {
-        'points' : number,
-        'target' : 'triple'
-      });
-      if ( result.target == number ) {
-        for (var j = expectedValues.length - 1; j >= 0; j--) {
-          sum += expectedValues[j].sum;
-        };
-      }
+    for (var i = 99; i >= 0; i--) {
+      for (var j = 2; j >= 0; j--) {
+        var result = physicalShotCalculator.simulateShoot( {
+          'points' : number,
+          'target' : 'triple'
+        });
+        if ( result.target == number ) {
+          for (var k = expectedValues.length - 1; k >= 0; k--) {
+            if ( expectedValues[k].points == result.points  ) {
+              total += expectedValues[k].sum;
+            }
+          };
+        }
+      };
     };
-    console.log( number + ' with difficulty '+difficulty+': ' + sum );
+    console.log( number + ' with difficulty '+difficulty+': ' + total/100 );
+  }
+
+  function testNumberOk( number, difficulty ) {
+    var total = 0;
+    difficultyManager.setDifficulty( difficulty );
+    for (var i = 99; i >= 0; i--) {
+      for (var j = 2; j >= 0; j--) {
+        var result = physicalShotCalculator.simulateShoot( {
+          'points' : number,
+          'target' : 'triple'
+        });
+        if ( result.target == number ) {
+          total += 1;
+        }
+      };
+    };
+    console.log( number + ' zone with difficulty '+difficulty+': ' + total/100 );
   }
 
 });

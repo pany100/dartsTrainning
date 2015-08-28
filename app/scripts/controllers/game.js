@@ -20,6 +20,7 @@ angular.module('dartTrainningApp')
       'out'         : 'out'
     };
     $scope.pcShootResult = [];
+    $scope.coordinatesShot = [];
     $scope.players = {
       p1 : cricketScoreManager.getPlayer1(),
       p2 : cricketScoreManager.getPlayer2()
@@ -50,11 +51,16 @@ angular.module('dartTrainningApp')
             'result' : " " + shotResult
           });
         }
+        $scope.coordinatesShot.push({
+          xf : result.xf,
+          yf : result.yf
+        })
         cricketScoreManager.processPoint('pc', result.points, result.target);
     };
 
     $scope.simulatePcShoot = function () {
       $scope.pcShootResult = [];
+      $scope.coordinatesShot = [];
       $scope.enableButtonPopup = false;
       var interval = $interval( function () {
         simulateSingleShot();

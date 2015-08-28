@@ -14,6 +14,8 @@ angular.module('dartTrainningApp')
         var xf     = this.getXFinalSimulation( aim ),
             yf     = this.getYFinalSimulation( aim ),
             result = physicalDistances.getZoneOnDartboard( xf , yf );
+        result.xf = xf;
+        result.yf = yf;
         return result;
       },
       getInitialYSpeed : function ( aim ) {

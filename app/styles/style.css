@@ -35,8 +35,21 @@
   height: 35px;
 }
 
+.popup-container .popup {
+  width: 355px;
+}
+
+.popup-container .popup .popup-body{
+  padding-left: 0;
+  padding-right: 0;
+}
+
 .popup-content{
   text-align: center;
+}
+
+#dartboard-bg{
+  display: none;
 }
 
 .score-button {
@@ -67,4 +80,8 @@
 
 .score-button.right-button.margin-right {
   margin-right: 7px;
+}
+
+#canvas {
+  margin-bottom: 20px;
 }
